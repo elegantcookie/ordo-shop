@@ -1,1 +1,1 @@
-web: gunicorn ordo-shop.wsgi
+web: gunicorn project.project.wsgi
