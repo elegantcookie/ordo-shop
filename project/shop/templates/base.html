@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>ordo-shop</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    {% include 'nav.html' %}
+        <div class="container">
+            <h3 class="text-center">Актуальные предложения</h3>
+            <div class="raw">
+                {% for i in promos %}
+                <div class="col-3">
+                <img src="{{i.proms.image.url}}">
+                <p>
+                    {{i.proms.name}}
+                </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</body>
+</html>
