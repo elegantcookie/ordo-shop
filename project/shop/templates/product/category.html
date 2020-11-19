@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if object_list %}
+    {% with object_list.products as products %}
+    {% with object_list.sort_form as sort_form %}
+    {% with object_list.price_form as price_form %}
+
+    <section class="cont">
+        <div class="cont-sort">
+        </div>
+        <div class="filt-cont">
+            <div class="flex-col-3">
+                {% for product in products %}
+                    <div class="card">
+                        <a href="{% url 'shop:product_detail' product.pk %}">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="изображение продукта">
+                        <div class="card-body">
+                            <p class="card-text">{{product.name | truncatechars:100}}</p>
+                        </div>
+                        </a>
+                        <p class="card-price">{{product.price}} ₽</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="block-filt">
+                <div class="top-part">
+                    <p>Цена</p>
+                </div>
+                <div class="bot-part">
+                    <form>
+                    {{ sort_form }}
+                    <button type="submit">
+                        Показать
+                    </button>
+                    <button type="reset">
+                        Отчистить
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+      </div>
+    </section>
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+{% else %}
+    <section class="cont">
+        <div class="cont-sort">
+        </div>
+        <div class="filt-cont">
+            <div class="flex-col-3">
+                {% for product in products %}
+                    <div class="card">
+                        <a href="{% url 'shop:product_detail' product.pk %}">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="изображение продукта">
+                        <div class="card-body">
+                            <p class="card-text">{{product.name | truncatechars:100}}</p>
+                        </div>
+                        </a>
+                        <p class="card-price">{{product.price}} ₽</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="block-filt">
+                <div class="top-part">
+                    <p>Цена</p>
+                </div>
+                <form>
+                <div class="mid-part">
+                    {{ price_form }}
+                    <p>₽</p>
+                </div>
+                <div class="bot-part">
+                    {{ sort_form }}
+                    <button type="submit">
+                        Показать
+                    </button>
+                    <button type="reset">
+                        Отчистить
+                    </button>
+
+                </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+        </div>
+      </div>
+    </section>
+{% endif %}
+{% endblock %}

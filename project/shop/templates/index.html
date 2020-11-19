@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="bg1">
+        <div class="promo">
+            <h3>Актуальные предложения</h3>
+            <div class="row">
+                {% for i in promos %}
+                <div class="col-3">
+                    <a href="{% url 'shop:get_category' i.proms.id %}">
+                        <img src="{{i.proms.image.url}}">
+                        <p>{{i.proms.name}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="bg2">
+        <div class="pop">
+            <h3>Самые популярные на данный момент</h3>
+            <hr>
+            <div class="row">asd</div>
+        </div>
+</section>
+{% endblock content %}

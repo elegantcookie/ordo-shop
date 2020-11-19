@@ -5,23 +5,28 @@
     <meta charset="UTF-8">
     <title>ordo-shop</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    {% include 'nav.html' %}
-        <div class="container">
-            <h3 class="text-center">Актуальные предложения</h3>
-            <div class="raw">
-                {% for i in promos %}
-                <div class="col-3">
-                <img src="{{i.proms.image.url}}">
-                <p>
-                    {{i.proms.name}}
-                </p>
-                </div>
-                {% endfor %}
-            </div>
+<nav class="navibar">
+    <div class="headroom-wrapper">
+        <div class="search">
+            <form class="in_search" action="{% url 'shop:search' %}" method='GET'>
+                <input class="search_inpt" name="q" type="search" placeholder="Поиск..." value="{{query_text}}">
+                <button class="search_btn">
+                    <img src="/static/images/search.svg">
+                </button>
+            </form>
+
         </div>
-    </section>
+        <ul class="head_btns">
+            <li><img src="/static/images/person_icon.svg"></li>
+            <li><img src="/static/images/heart.svg"></li>
+            <li><img src="/static/images/supermarket.svg"></li>
+        </ul>
+    </div>
+    <div class="action_stroke" role="alert"></div>
+</nav>
+{% block content %}
+{% endblock %}
 </body>
 </html>

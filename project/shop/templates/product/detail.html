@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <div class="content">
+        <div class="content-top">
+            <div class="left-img">
+                {% for i in product_images %}
+                <img src="{{i.image.url}}">
+                {% endfor %}
+            </div>
+            <div class="img">
+                <img src="{{product.image.url}}">
+            </div>
+            <div class="right-info">
+                <div class="upper-block">
+                    <div class="upper-block-content">
+                        <h3>{{product.name}}</h3>
+                        <p>{{product.price}} ₽</p>
+                        <form class="upper-block-content-form" action="{% url 'cart:cart_add' product.id %}">
+                            <input type="submit" value="Добавить в корзину">
+                        </form>
+                    </div>
+                </div>
+                <div class="lower-block">
+                    <div class="lower-block-content">
+                        <p>Название: A.I.Channel </p>
+                        <p>Персонаж: Kizuna Ai</p>
+                        <p>Тип фигурки: Модель в сборе</p>
+                        <p>Материал: ПВХ, пластмасса</p>
+                        <p>Высота: 240 мм</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <div class="description-content">
+                <h6>Описание</h6>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+        <div class="reviews">
+            <div class="reviews-content">
+                <h6>Отзывы</h6>
+                <div class="col-12">
+                    <div class="col-1">
+                        <img src="{{product.image.url}}">
+                    </div>
+                    <div class="col-5">
+                        <p>Имя пользователя</p>
+                    </div>
+                    <div class="col-6">
+                        <div class="stars">
+                          <div class="star"></div>
+                          <div class="star"></div>
+                          <div class="star"></div>
+                          <div class="star"></div>
+                          <div class="star"></div>
+                        </div>
+                        <div class="date">
+                            <p>28/07/2020</p>
+                        </div></div>
+                </div>
+                <div class="p">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque imperdiet, nisl vel suscipit euismod, purus arcu feugiat tellus, quis gravida lorem ipsum non metus. Integer risus risus, pulvinar in maximus sit amet, posuere sed mi. Morbi luctus volutpat suscipit. Nam et nunc cursus, ullamcorper ex aliquam, accumsan ex. Nulla est est, suscipit et arcu ac, lobortis mattis tellus. In euismod aliquam odio eget vestibulum. Ut risus ligula, convallis porttitor auctor sed, finibus eu sem. Suspendisse et sapien non quam gravida placerat. Donec commodo, odio ac fermentum efficitur, libero diam feugiat tellus, vel imperdiet ex mi vel nunc.</p>
+                </div>
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock %}

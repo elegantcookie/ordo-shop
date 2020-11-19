@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section>
+    <div class="cart-content">
+        <h3>Корзина</h3>
+        <div class="cart-content-cover">
+            <div class="left-side-content">
+                {% for item in cart %}
+                    {% with product=item.product  %}
+                    <div class="cart-line" cellspacing="0">
+                        <div class="cart-img">
+                            <a href="{{product.get_absolute_url}}">
+                                <img class="cart-img" src="{{ product.image.url }}" alt="...">
+                            </a>
+                        </div>
+                        <div class="cart-description">
+                            <p class="cart-name">{{ product.name }}</p>
+                            <p class="cart-price">
+                                {{ item.total_price }} ₽
+                            </p>
+                            <p class="cart-id">
+                                Артикул: {{ product.id }}
+                            </p>
+                        </div>
+                        <div class="cart-amount">
+                            <div class="cart-amount-inner">
+                                <div class="quantity">
+                                <form action="{% url 'cart:take_quantity' product.id %}">
+                                    {% csrf_token %}
+                                    <input type="submit" value="-" class="take_quantity">
+                               </form>
+                                <div class="quantity_out">{{ item.quantity }}</div>
+                                <form method="POST" action="{% url 'cart:add_quantity' product.id %}">
+                                    {% csrf_token %}
+                                    <input type="submit" name="add_quantity" value="+" class="add_quantity"></inputbutton>
+                                </form>
+                                </div>
+                                <p>
+                                    {% if item.quantity > 1 %}
+                                        {{ product.price }} ₽ за шт.
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="cart-remove">
+                                <a href="{% url 'cart:remove_product' product.id %}">
+                                    <img class="cart-remove-img" src="/static/images/exit.svg">
+                                </a>
+                        </div>
+                    </div>
+                    {% endwith %}
+                {% endfor %}
+        </div>
+        <div class="buy-menu">
+            <div class="buy-menu-content">
+                <p>Итого</p>
+                <hr>
+                <div class="payment-price">
+                    <div class="payment-price-first">
+                        <p>Всего:</p>
+                        <p>{{ cart.get_total_price }} ₽</p>
+                    </div>
+                    <div class="payment-price-second">
+                        <p>Доставка: </p>
+                        <p>150 ₽</p>
+                    </div>
+                </div>
+                <form class="shipment">
+                    <input value="Стандартная доставка">
+                </form>
+                <form>
+                    <input class="payment-proceed" type="submit" value="Оплатить">
+                </form>
+                <p class="last-p">Мы принимаем:</p>
+                <img src="/static/images/cards.svg">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
